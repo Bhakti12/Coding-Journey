@@ -1,0 +1,31 @@
+class Solution {
+public :
+    int search(vector<int>& arr,int num)
+    {
+        int n = arr.size();
+        int lower = 0,higher = n - 1,mid;
+        //check until while lower < = right
+        while(lower<=higher)
+        {
+            //middle element
+            mid = (lower+higher)/2;
+            //if middle element is number that should be target then it returns
+            if(arr[mid] == num)
+            {
+                return mid;
+            }
+            else if(arr[mid]<num)
+            {
+                lower = mid + 1;
+                
+                
+            }
+            else
+            {
+                higher = mid - 1;
+            }
+        }
+        return -1;
+    }
+    
+};
