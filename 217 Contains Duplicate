@@ -1,0 +1,17 @@
+//approach i used sort the array and compare index
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) 
+    {
+    //second method sort the array and compare previous element
+	    sort(nums.begin(),nums.end());
+        for(int i=1;i<nums.size();i++)
+        {
+            if(nums[i-1] == nums[i])
+             return true;
+        }
+    
+        return false;
+
+    }
+};
