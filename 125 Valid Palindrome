@@ -1,0 +1,75 @@
+/*class Solution
+{
+public:
+    bool isPalindrome(string s) 
+    {
+        int start = 0,end = s.size()-1;
+        
+        //case 1 if string is empty then return true.
+         if(s.size()==0)
+         {
+             return true;
+         }
+         while (start <= end) 
+         {
+            while (!isalnum(s[start]) && start < end) 
+            {
+                start++;
+            }
+            while (!isalnum(s[end]) && start < end) 
+            {
+                end--;
+            }
+            if (lowercase(s[start]) != lowercase(s[end])) 
+            {
+                return false;
+            }
+            start++, end--;
+        }
+        return true;
+    }
+    //check if character is alphabet and digits.
+    bool isalnum(char c)
+    {
+        if(('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') || ('0' <= c && c <= '9'))
+            return true;
+        else
+            return false;
+    }
+    //check if character is in uppercase then it converts to lowercase if it is not then remins same.
+    bool lowercase(char c)
+    {
+        if('A' <= c && c <= 'Z')
+            return c+32;
+        else
+            return c;
+    }
+
+};*/
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int left = 0, right = s.size() - 1;
+        while (left <= right) {
+            while (!isTarget(s[left]) && left < right) {
+                left++;
+            }
+            while (!isTarget(s[right]) && left < right) {
+                right--;
+            }
+            if (toLower(s[left]) != toLower(s[right])) {
+                return false;
+            }
+            left++, right--;
+        }
+        return true;
+    }
+    bool isTarget(char c) {
+        return (('A' <= c && c <= 'Z') || 
+                ('a' <= c && c <= 'z') || 
+                ('0' <= c && c <= '9')) ? true : false;
+    }
+    char toLower(char c) {
+        return ('A' <= c && c <= 'Z') ? c + 32 : c;
+    }
+};
