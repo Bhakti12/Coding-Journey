@@ -1,3 +1,9 @@
+//using binary search
+//algorithm : 
+//step - 1 : initialize left and mid to zero and right to array size - 1
+//step - 2 : loop until left is lower then equals to right
+//step - 3 : if array element means mid is equal to target then return mid otherwise check for if target element is greater then left side goes to right side means left = mid + 1; otherwise goes to left side right = mid - 1 then return index.
+
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) 
