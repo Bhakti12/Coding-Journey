@@ -1,0 +1,30 @@
+//algorithm : using binary search 
+
+// The API isBadVersion is defined for you.
+// bool isBadVersion(int version);
+
+class Solution {
+public:
+    int firstBadVersion(int n) 
+    {
+        //here ans is store the value of position.
+            int left = 0,mid = 0,right = n,ans = 0;
+            while(left<=right)
+            {
+                //calculate mid
+                mid = left+(right - left)/2;
+                //here case -1 if mid is bad then we shift to mid-1 means left side.
+                if(isBadVersion(mid))
+                {
+                    ans = mid;
+                    right = mid - 1;
+                }
+                //if we are in good product then it shift to mid + 1.
+                else
+                {
+                    left = mid + 1;
+                }
+            }
+        return ans;
+    }
+};
