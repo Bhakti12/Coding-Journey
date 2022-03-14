@@ -1,0 +1,39 @@
+//The optimized approach uses the fast modulo exponentiation algorithm. We can implement fast modulo exponentiation either in a recursive manner or iteratively. In fast modulo exponentiation, we multiply the base in the power of 2. By this, we meant that we keep on multiplying the base by itself. So, in the first step, the base becomes squared of itself. Let’s suppose the base denoted by “b”. So in the first step, it becomes b^2, in the next step it will become b^4, then b^8, then b^16, and so on. Now, we multiply only the base powers corresponding to the ones in the exponent. So, convert exponent in binary format and keep on multiplying the bases as per the exponent binary format. For example, calculate 3^6. Here base =3, exponent = 6. Converting 6 in binary format makes it 110. Now, in the first step, we check if the exponent has 1. Since 6 has 0 as its first lowest significant bit, we skip it and the base becomes b^2. Now, 6 has 1 as its 2nd lowest significant bit, so we multiply b^2 to the answer. Now the answer is equal to b^2. The base then becomes b^4. Since 6 has 1 as its 3rd lowest significant bit, we multiply b^4 to the answer. The answer now becomes b^2 * b^4 = b^6. And this was what we wanted. Check the implementation below to find how to implement the algorithm.
+
+class Solution {
+public:
+    double myPow(double x, int n) 
+    {
+        double product = 1;
+        if(n==0)
+        {
+            return 1;
+        }
+        if (n == INT_MAX) 
+            return x;
+        else if (n == INT_MIN) 
+            return (x == 1 || x == -1) ? 1 : 0;
+        /*if(n== INT_MIN)
+                n = abs(n+1);   
+            else
+                n=abs(n);*/
+        if(n<0)
+        {
+            x = 1/x;
+            n*=-1;
+        }
+       /* for(int i=0;i<n;i++)
+        {
+            product = product * x;
+        }
+        return product;*/
+        while(n>0)
+        {
+            if(n&1)
+            product *= x;
+            x = x*x;
+            n = n>>1;
+        }
+        return product;
+    }
+};
