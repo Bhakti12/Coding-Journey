@@ -1,0 +1,47 @@
+approach : using stack 
+
+step - 1 If you find open bracket then push it to the stack
+step - 2 If you meet closing bracket then we have following conditions
+i. If stack is empty -> it means we don't have corresponding opening bracket [return false]
+ii. If top bracket of stack is of same pair i.e. '(' for ')' return true, else return false
+
+class Solution {
+public:
+    bool isValid(string s) {
+        int len = s.length();
+        stack<char> st;
+        for (int i = 0; i < len; i++)
+        {
+            if (s[i] == '(' || s[i] == '[' || s[i] == '{')
+            {
+                st.push(s[i]);
+            }
+            else
+            {
+                if (st.empty())             // if stack is empty, it means
+                    return false;           // we don't have closing for open bracket
+                char stackTop = st.top();
+                st.pop();
+                if (s[i] == ')')             // check for same pair type
+                {
+                    if (stackTop != '(')
+                        return false;
+                }
+                else if (s[i] == ']')
+                {
+                    if (stackTop != '[')
+                        return false;
+                }
+                else
+                {
+                    if (stackTop != '{')
+                        return false;
+                }
+            }
+        }
+        if (st.empty())
+            return true;
+        else
+            return false;
+    }
+};
