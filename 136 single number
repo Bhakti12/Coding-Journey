@@ -1,0 +1,59 @@
+//using XOR approach
+//Exclusive or (XOR) is one of a logicl operator that outputs is true (=1) only when two inputs differ. On the contrary, outputs is false (=0) only when the two inputs are the same.
+/*class Solution {
+public:
+    int singleNumber(vector<int>& nums) 
+    {
+        int n1 = nums.size();
+        int count = 0,i;
+        for(i=0;i<n1;i++)
+        {
+            count = count ^ nums[i];
+        }
+        return count;
+    }
+};*/
+//using map approach
+//A map container is supporting generic type key-value pairs with the templates.
+
+//Therefore, the elements of nums vector will be stored into map<int,int>, I set the element as a key (unique), give 1 as a value (means a counter). If the element is exist in map already, a counter will be added 1.
+
+//Finally, I use a loop to check each pairs whether a counter is equal to 1. Remember to return a key of pair.
+
+class Solution 
+{
+  public : 
+    int singleNumber(vector<int>& nums)
+    {
+       int n1 = nums.size();
+        if(n1 == 1) 
+        {
+            return nums[0];
+        }
+        map<int, int> mapNum;//element of nums will be stored in this.
+        map<int, int>::iterator it;
+        int ans;
+        //it checks elements if element is already in map then count will be added 1
+        for(int i = 0; i < n1; i++)
+        {
+            it = mapNum.find(nums[i]);
+            if(it == mapNum.end())
+            {
+                mapNum.insert(pair<int,int>(nums[i], 1));
+            }
+            else
+            {
+                it->second += 1;
+            }
+        } 
+        for(it = mapNum.begin(); it != mapNum.end(); it++)
+        {
+            if(it->second == 1)
+            {
+                ans = it->first;
+                break;
+            }
+        }
+        return ans;
+    }    
+};
