@@ -1,0 +1,17 @@
+//Now, if n is some power of two, then (n – 1) will turn off all the right bits to the set bit(set them as ‘0’) and the set bit would be unset.
+
+//n = 8[1000], n – 1 = 7[0111]
+
+//So, using BITWISE-AND of n and (n – 1), we can say if a number is some power of two, then, n & (n – 1) = 0
+class Solution {
+public:
+    bool isPowerOfTwo(int n) 
+    {
+       if(n<=0) 
+           return false;
+       if(n&n-1) 
+           return false;
+       else 
+            return true;
+    }
+};
