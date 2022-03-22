@@ -1,0 +1,52 @@
+//approach : two pinters
+
+//algorithm
+:
+/*Initialize two variables i and j storing indices of the last element of the first and second array respectively.
+i = M – 1 , j = N – 1
+Initialize a variable idx, storing the last index of the first array, that is:
+idx = N + M – 1
+Now, do the following until either of i or j becomes zero
+If a[i] >= b[j]
+Assign a[idx] = a[i], decrement i
+Else
+Assign a[idx] = b[j], decrement j
+Decrement idx
+Either of i or j is not zero, which means some elements are yet to be merged. As they would already be in a sorted manner, we simply append them to the first array in the front.
+While i does not become zero,
+Assign a[idx] = a[i]
+Decrement idx and i
+While j does not become zero,
+Assign a[idx] = b[j]
+Decrement idx and j
+Now first array has all the elements in the required sorted order.*/
+
+class Solution 
+{
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) 
+    {
+        int i = m - 1 , j = n - 1 , idx = m + n - 1;
+    while(i >= 0 && j >= 0)
+    {
+        if(nums1[i] >= nums2[j])
+        {
+            nums1[idx] = nums1[i];
+            i--;
+        }
+        else
+        {
+            nums1[idx] = nums2[j];
+            j--;
+        }
+        idx--;
+    }
+    while(i >= 0)
+        nums1[idx--] = nums1[i--];
+    while(j >= 0)
+        nums1[idx--] = nums2[j--];
+    return;
+        
+        
+    }
+};
