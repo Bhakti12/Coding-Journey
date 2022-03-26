@@ -1,0 +1,17 @@
+//explanation : 
+/*It is very easy to find total odd numbers in the given interval range as we know there are almost half even and half odd numbers in an interval range.
+But we have to consider the interval boundaries very carefully. So what we can do is we can form the formula for the count of odd numbers in first n natural numbers. Let it be count[n]. Then odd numbers between low and high will be equal to :
+count[ low, high ] = count[high] – count[low-1].
+0---------------3(low)-----7(high)----------
+---------------------------length of high
+---------------low-1-------count[low,high]
+*/
+
+class Solution 
+{
+public:
+    int countOdds(int low, int high) 
+    {
+           return (high+1)/2 - low/2;
+    }
+};
