@@ -1,0 +1,26 @@
+/*explanation : 
+
+Initialize minimum salary with INT_MAX, the maximum salary with INT_MIN. We will use a variable to store the salary sum so initialize it with 0.
+Traverse the array and add each salary to the sum. Meanwhile, also update the value of the minimum salary and maximum salary.
+If the value of n is smaller than three then the average salary will be zero else average salary will be (total salary-the minimum salary-the maximum salary)/(n-2).
+We will multiply (n-2) with 1.0 because the average salary can be a double value.*/
+
+class Solution {
+public:
+    double average(vector<int>& salary) 
+    {
+        int n=salary.size();
+        int mn=INT_MAX,mx=INT_MIN,sum=0;
+        for(int i=0;i<n;i++)
+        {
+            sum=sum+salary[i];
+            mn=min(mn,salary[i]);
+            mx=max(mx,salary[i]);
+        }
+        double ans=(sum-mn-mx)/((n-2)*1.0);
+        if(n>2)
+            return ans;
+        else 
+            return 0;
+    }
+};
