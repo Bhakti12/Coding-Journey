@@ -1,0 +1,39 @@
+comapny : 
+
+code : 
+class Solution {
+public:
+    int maxArea(vector<int>& height) 
+    {
+          int h = height.size();
+          int l = 0;
+        int r = h-1;
+        int area = 0;
+         while(l<r) {
+            area = max(min(height[l],height[r])*(r-l),area);
+            if (height[l]<height[r]) {
+                l++;
+            } else  {
+                r--;
+            }
+        }
+        return area;
+    }
+};
+
+Algoeithm : 
+
+Start with taking two pointers - l and r. Initialize them for the start and end of the array respectively.
+Run a while loop such that l<r.
+Calculate the area for the current l and r.
+Now, move the pointer for which the height is lesser.
+Keep a track of maximum area encountered.
+
+Time Complexity: O(N)
+Space Complexity: O(1)
+
+Why This Approach Works?
+
+We start with the maximum width. Now for the maximum width, there's only one possible area. From here, the only possibility is decreasing the width. For any area, the limiting factor is the smaller of the two heights. This means that when we decrease the width, if we retain the smaller of the two heights and then also decrease the width, we are guaranteed to get a smaller area than what we already encountered. That is why we retain the larger of the two heights and move inwards from the pointer where the height is smaller.
+
+In the scenario when both the heights are the same (lets say h), it doesn't matter which one we move. We can move the left pointer or the right pointer or we can also move both left and right pointer. That is because for that particular width, we have already found the area (lets say A1). Now we can choose to move inward from either directions. This is because the only case in which the area will be greater than A1 is if both the sticks are greater than the height h.
