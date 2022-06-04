@@ -1,0 +1,41 @@
+
+Frequently asked in Adobe Amazon Apple
+
+//condition : number is positive
+//repeat the process : replace the number by the sum of the squares of its digits
+//repeat that process until the number equals one
+//numbers for which this process ends in 1 are happy.
+class Solution {
+public:
+    bool isHappy(int n) 
+    {
+            int num=n;
+        int x,y;
+        
+        while(num>9)
+        {
+            int result=0;
+            while(num>0)
+            {
+                x=num%10;
+                y=x*x;
+                result+=y;
+                num/=10;
+            }
+            num=result;
+            /*if(num!=1){
+                return false;
+            }*/
+        }
+        if(num==1 || num==7)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+            
+    }
+};
