@@ -1,0 +1,33 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+//define two listnodes tempA for listA and tempB for listB 
+    //and iterate over the respective list until we reach at their end 
+    //when we reach at the end, we start traversing in the opposite list
+    //until tempA and tempB are reach at the same node 
+    //if they reach we get the intersection node otherwise if there is no intersect node
+    //we reach at NULL and return
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
+    {
+        ListNode *tempA = headA, *tempB = headB;
+        
+        if(tempA==NULL || tempB==NULL) return NULL;
+        
+        while(tempA!=tempB)
+        {
+            tempA==NULL ? tempA=headB : tempA=tempA->next;
+            tempB==NULL ? tempB=headA : tempB=tempB->next;
+        }
+        
+        return tempA;
+    }
+};
+
+company  : Adobe Airbnb Amazon Apple Bloomberg ByteDance eBay Facebook Goldman Sachs Google Intuit LinkedIn Microsoft Morgan Stanley Nutanix Nvidia Oracle PayPal Qualcomm Samsung Spotify Uber Yahoo
