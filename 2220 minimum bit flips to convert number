@@ -1,0 +1,19 @@
+//The idea is to count the number of bits in START that doesn't match GOAL.
+
+//Use start XOR goal to fetch unique bits.
+//Count the numer of unique bits using while loop. (note: n&(n-1) allows you rid least set bit //i.e. for bit string 10000100, you'll only iterate twice, since each loop gets rid of 1 bit.
+//Hoping my attempt to explain makes any sense.
+//Runtime beats 100% and storage 80%.
+class Solution {
+public:
+    int minBitFlips(int start, int goal) {
+        int count=0;
+        int unique = start^goal; // XOR start and goal generates unique items in both e.g. 1011 ^ 1000 = 0011
+        while(unique){ //When then count the number of bits in unique
+            count++;
+            unique=unique&(unique-1); // Quick way to eliminate the least set bit, reducing the while look to O(k) when k=number of set bits
+            
+        }
+        return count;
+    }
+};
