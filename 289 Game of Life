@@ -1,0 +1,63 @@
+/*If the value of any cell is updated, upcoming calculations will be effected. So, to update values from 0 to 1 or 1 to 0, what about adding 2 to them. My suggestion is as follows:
+
+For each cell, check if cell needs to be updated. If update is needed (0 to 1 OR 1 to 0), add 2 to cells.
+To check the number of live cells, instead of checking value == 0, check if value % 2 == 0.
+After traversing all the cells,
+0 means dead cells and they will remain dead.
+1 means live cells and they will remain live.
+2 means dead cell who will become live.
+3 means live cell who will become dead.
+To update all the cells to valid values, update those having >= 2 condition to (3-x) to make 2->1 and 3->0
+My code:
+*/
+class Solution {
+public:
+    
+    bool change(vector<vector<int>>& board, int i, int j) {
+        unsigned short int numOnes = 0;
+        
+        for(int ii = -1; ii <= 1; ii++) {
+            for (int jj =-1; jj <= 1; jj++) {
+                if(ii == 0 && jj == 0)
+                    continue;
+                if(i + ii < 0 || i + ii == board.size())
+                    continue;
+                if(j + jj < 0 || j + jj == board[0].size())
+                    continue;
+                
+                numOnes += (board[i+ii][j+jj]%2);
+            }
+        }
+        
+        if (board[i][j] && (numOnes < 2 || numOnes > 3))
+            return true;
+        if(!board[i][j] && numOnes == 3)
+            return true;
+        return false;
+        
+    }
+    
+    
+    void gameOfLife(vector<vector<int>>& board) {
+        int m = board.size();
+        int n = board[0].size();
+        
+        // make 0->2 to 1->3 to make sure they will be updated. mod 2 values will remain same.
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(change(board,i,j)) {
+                    board[i][j] += 2;
+                }
+            }
+        }
+        
+        // if board value is above 1, 3-value will be 0 or 1 (2 will be 1, 3 will be 0).
+        // Let current value of board[i][j] be x. (x%2) = old value, (3-x) will be new value.
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                board[i][j] = board[i][j] >= 2 ? 3-board[i][j] : board[i][j];
+            }
+        }
+        
+    }
+};
