@@ -1,0 +1,51 @@
+class Solution {
+public:
+    int furthestBuilding(vector<int>& heights, int bricks, int ladders) 
+    {
+        int n = heights.size();
+        
+        priority_queue<int,vector<int>,greater<int>> pq;
+        
+   for(int i=1;i<n;i++){
+            
+            // ladder or brick is required
+            if(heights[i]>heights[i-1]){
+                
+                // using all ladders before bricks
+                if(ladders){
+                    pq.push(heights[i]-heights[i-1]);
+                    ladders--;
+                }
+                // when all laders are used
+                else{
+                    
+                    // if smallest element in priority queue is greater than jump to be taken
+                    if( !pq.empty() && pq.top()>heights[i]-heights[i-1] && bricks>=heights[i]-heights[i-1]){
+                        bricks-=heights[i]-heights[i-1];
+                    }
+                    
+                    // if bricks to be used are more than smallest element in priority queue 
+                    // then use ladder in current building and bricks at previous position insted of ladder
+                    else if(!pq.empty() && bricks >= pq.top()){
+                        bricks-=pq.top();
+                        pq.pop();
+                        pq.push(heights[i]-heights[i-1]);
+                    }
+                    
+                    // if only bricks are left
+                    else if(pq.empty() && bricks>=heights[i]-heights[i-1]){
+                        bricks-=heights[i]-heights[i-1];
+                    }
+                    
+                    // jump is not possible 
+                    else {
+                        return i-1;
+                    }
+                }
+            }
+        }
+        
+        // reached at the end
+        return n-1;    
+    }
+};
