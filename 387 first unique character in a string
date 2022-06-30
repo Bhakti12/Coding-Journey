@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int firstUniqChar(string s) 
+    {
+        unordered_map<char,int> map;//Map char to its count in the string
+        for(int i=0;i<s.length();i++)
+        {
+            map[s[i]]++;//Everytime the character appears in the string, add one to its count
+        }
+        for(int i=0;i<s.length();i++)/// Start traversing the string from the beginning. 
+        {
+            if(map[s[i]]==1)//If the count of the char is equal to 1, it is the first distinct character in the list.
+  
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+};
