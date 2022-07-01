@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int longestPalindrome(string s) 
+    {
+            if(s.size()==0) return 0;
+        if(s.size()==1) return 1;
+        if(s.size()==2 and s[0]!=s[1]) return 1; //Base Cases
+        
+        bool temp=false;
+        for(int i=0;i<s.size()-1;i++)  
+            if(s[i]!=s[i+1])
+                temp=true;
+        
+        if(!temp) return s.size();   // If all the characters are same then return the string length
+        
+        unordered_map<char,int>mp;
+        for(int i=0;i<s.size();i++)
+            mp[s[i]]++;             
+        
+        int cnt=0;bool flag=false;
+        for(auto it: mp)
+        {
+            if(it.second%2==0)    // If char freq is even then add every characters
+                cnt+=it.second;
+            else if(it.second>=3 and it.second%2!=0) // if freq is odd then take the max even no.
+            {
+                int x=it.second/2;
+                cnt+=x*2;
+            }
+            
+            if(it.second==1 or it.second%2==1)  // check if any 1 freq character exist or not
+                flag=true;
+        }
+        
+        return (flag)?cnt+1:cnt;  //if 1 freq char exist then add it else just return count
+    }
+};
