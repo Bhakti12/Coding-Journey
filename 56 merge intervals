@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) 
+    {
+            vector<vector<int>> mergeint;
+            if(intervals.size()==0)
+            {
+                return mergeint;
+            }
+            sort(intervals.begin(),intervals.end());
+            vector<int> temp = intervals[0];
+            for(auto it: intervals)  //Linearly traverse in the intervals.
+            {
+                if(it[0] <= temp[1] )  //Check oif 2 < 3 or not(check example 1).
+                {
+                    temp[1] = max(it[1] , temp[1]); //find the max of the right of the current interval or right of the temp interval and then merge them.
+                
+                }
+            //And if they are not merging.
+                else  
+                {
+                    mergeint.push_back(temp); //store thr resultant interval(which is temp) in the MergedIntervals                  
+                    temp=it;  //Reassign the "it" interval in the "temp" interval.
+                }
+            }
+            mergeint.push_back(temp); //Last resultant interval.
+            return  mergeint; //return answer.
+    }
+};
