@@ -23,7 +23,20 @@ public:
                     temp=it;  //Reassign the "it" interval in the "temp" interval.
                 }
             }
-            mergeint.push_back(temp); //Last resultant interval.
+            mergeint.push_back(temp); //Last resultant interval.*/
+            /*for(int i=0;i<intervals.size();i++)
+            {
+                for(int j=0;j<intervals.size()-i-1;j++)
+                {
+                    if(intervals[j]>intervals[j+1])
+                    {
+                        vector<int> t=intervals[j];
+                        intervals[j]=intervals[j+1];
+                        intervals[j+1]=t;
+                    }
+                }
+            }*/
+
             return  mergeint; //return answer.
     }
 };
