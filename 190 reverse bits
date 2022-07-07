@@ -1,0 +1,14 @@
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) 
+    {
+          uint32_t result=0;//initialize the resutlt to zero
+        int no_of_bits = sizeof(n)*8;//getting the number of bits, since it of uint32_t bits it can be hardcoded to 32 as well
+        for(int i=0;i<no_of_bits;i++){ //iterating over each bit
+            if(n & (1<<i)){    //checking only setbits from LSB(least significat bit) to MSB(most significant bit)
+                result = result | (1 <<(no_of_bits-1)-i); //if the bit is set we shift, since 1 is already a position zero, we subtract 1 along with i
+            }
+        }
+        return result;  
+    }
+};
