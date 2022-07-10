@@ -1,0 +1,25 @@
+class Solution {
+public:
+    //first we compare sum of numbers for example 2 it returns sum after sort that which is largest number.
+    static bool compare(int &a,int &b)
+    {
+        string s1=to_string(a); 
+        string s2=to_string(b);
+        return (s1+s2 > s2+s1);
+    }
+    string largestNumber(vector<int>& nums) 
+    {
+        //int n=nums.size();
+        string sum="";
+        sort(nums.begin(),nums.end(),compare);
+        if(nums[0]==0)
+        {
+            return "0";
+        }
+        for(int x:nums)
+        {
+            sum += to_string(x);
+        }
+        return sum;
+    }
+};
