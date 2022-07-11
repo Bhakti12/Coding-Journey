@@ -1,0 +1,52 @@
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) 
+    {
+            //time complexity : n!*n
+        //space complexity : o(n)+o(n)
+        vector<vector<int>> ans;
+        vector<pair<int,int>> n;
+        for(auto i:nums) 
+            n.push_back(make_pair(i,1));
+        per(n,{},ans);
+        return ans;
+    }
+   /* void recurpurmut(vector<int> &ds,vector<int> &nums,vector<vector<int>>ans,int freq[])
+    {
+       if(ds.size()==nums.size())
+       {
+           ans.push_back(ds);
+           return;
+       }
+       for(int i=0;i<nums.size();i++)
+       {
+           if(!freq[i])
+           {
+               ds.push_back(nums[i]);
+               freq[i]=1;
+               recurpurmut(ds,nums,ans,freq);
+               freq[i]=0;
+               ds.pop_back();
+           }
+       }
+    }*/
+    void per(vector<pair<int,int>> nums,vector<int> ds,vector<vector<int>>& ans)
+    {
+        if(ds.size()==nums.size())
+        {
+            ans.push_back(ds);
+            return;
+        }
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i].second==1)
+            {
+                ds.push_back(nums[i].first);
+                nums[i].second=0;
+                per(nums,ds,ans);
+                nums[i].second=1;
+                ds.pop_back();
+            }
+        }
+    }
+};
