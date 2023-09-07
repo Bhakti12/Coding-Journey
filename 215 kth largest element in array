@@ -1,0 +1,36 @@
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var findKthLargest = function(nums, k) {
+    const quickSort = (nums,left,right,k) => {
+        if (left === right) return nums[left];
+
+        const pivotIndex = partition(nums, left, right);
+        if (k === pivotIndex) return nums[pivotIndex];
+        else if (k < pivotIndex) return quickSort(nums, left, pivotIndex - 1, k);
+        else return quickSort(nums, pivotIndex + 1, right, k);
+    };
+
+    const partition = (nums,left,right) => {
+        const pivotValue = nums[right];
+        let i = left;
+        for (let j = left; j < right; j++) {
+            if (nums[j] >= pivotValue) {
+                swap(nums, i, j);
+                i++;
+            }
+        }
+        swap(nums, i, right);
+        return i;
+    };
+
+    const swap = (nums, i, j) => {
+        const temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    };
+
+    return quickSort(nums, 0, nums.length - 1, k - 1);
+};
