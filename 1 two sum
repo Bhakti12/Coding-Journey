@@ -16,3 +16,25 @@ hashtable[nums[i]]=i;}
     }
     
 };
+
+
+javascript solution : 
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    const numIndex = {};
+
+    for(let i=0;i<nums.length;i++){
+        const substraction = target - nums[i];
+        if(numIndex.hasOwnProperty(substraction)){
+            return [numIndex[substraction],i];
+        }
+        numIndex[nums[i]] = i;
+    }
+
+    return [];
+};
