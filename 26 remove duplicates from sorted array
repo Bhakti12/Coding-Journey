@@ -17,3 +17,22 @@ public:
             return i+1;
     }
 };
+
+
+javascript solution : 
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    let length = nums.length;
+    let j = 0;
+    for(let i=1;i<length;i++){
+        if(nums[j] !== nums[i]){
+            j++;
+            nums[j] = nums[i];
+        }
+    }
+    return j+1;
+};
